@@ -1,3 +1,7 @@
+-- automata05.hs 
+-- convert NFAs to DFAs
+-- exercise: complete nfa2dfa
+
 data DFA s = DFA {
   dfa_initial :: s,
   dfa_final :: s -> Bool,
@@ -63,8 +67,8 @@ nfa_recognize nfa word = nfa_semantics nfa (nfa_initial nfa) word
 -- convert an NFA to a DFA
 nfa2dfa :: NFA s -> DFA [s]
 nfa2dfa nfa = DFA {
-  dfa_initial = [nfa_initial nfa],
-  -- the next two definitions are wrong
+  -- exercise: correct the next three definitions 
+  dfa_initial = [],
   dfa_final = let final qs = True in final,
   dfa_delta = let delta qs c = qs in delta }
 
@@ -80,7 +84,7 @@ removeDuplicates = foldl (\seen x -> if x `elem` seen
 
 main = do
   -- see above for the definition of the NFA nfa1
-  let word = "bbbga" -- change for testing
+  let word = "bbbg" -- change for testing
   let dfa1 = nfa2dfa nfa1 -- the determinization of nfa1
   putStrLn "NFA:"
   print $ nfa_recognize nfa1 word -- does nfa1 accept word?
